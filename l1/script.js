@@ -1,60 +1,36 @@
-var first = 1;
+var budget = +prompt("Ваш бюджет", "100000");
+var shopName = prompt("Название Вашего магазина", "Ваш магазин");
+var product1 = prompt("Какой тип товаров будем продавать?", "Товар");
+var product2 = prompt("Какой тип товаров будем продавать?", "Товар");
+var product3 = prompt("Какой тип товаров будем продавать?", "Товар");
+var shopGoods = [product1, product2, product3];
 
-const pi = 3.14;
-
-{
-	let second = 2;
+mainList = {
+	Budget: budget,
+	Shop: shopName,
+	Products: shopGoods,
+	employers: {
+		Manager: "Петров",
+		Dispatcher: "Сидоров",
+		Courier: "Иванов"
+	},
+	open: true
 }
 
-console.log(4/0);
-console.log('string' * 9);
+console.log(budget);
+console.log(shopName);
+console.log(shopGoods[0]);
+console.log(shopGoods[1]);
+console.log(shopGoods[2]);
+console.log(mainList.Budget);
+console.log(mainList.Shop);
+console.log(mainList.Products[0]);
+console.log(mainList.Products[1]);
+console.log(mainList.Products[2]);
+console.log(mainList.employers.Manager);
+console.log(mainList.employers.Dispatcher);
+console.log(mainList.employers.Courier);
+console.log(mainList.open);
 
-// console.log(n1);
 
-var und;
-console.log(und);
-
-obj = {
-	name: "John",
-	age: 25,
-	isMarried: false
-}
-
-console.log(obj.name);
-console.log(obj["name"]);
-
-var arr = ['plum', 'orange', 'apple'];
-console.log(arr[0]);
-console.log(arr[2]);
-
-// alert("Hello");
-// confirm("Are you here?");
-// var answer = +prompt("Are you 18?", "18");
-
-// console.log( typeof(answer));
-// console.log( typeof(arr));
-
-// console.log('arr' + " - object");
-
-var icnr = 10;
-		decr = 10;
-
-// icnr++;
-// decr--;
-
-// console.log(icnr++);
-// console.log(decr--);
-
-console.log(10%4);
-
-console.log(icnr == 10);
-console.log('10' === 10);
-
-var isChecked = true;
-var isClose = true;
-
-console.log(isChecked && isClose);
-console.log(isChecked && !isClose);
-
-console.log(isChecked || !isClose);
-
+alert('Ваш бюджет на 1 день - ' + budget/30 + ' рублей');
