@@ -12,14 +12,13 @@ let mainList = {
 
 for (let i = 0; i < 5; i++) {
 
-	let a = prompt("Какой тип товаров будем продавать?");
+	let a = prompt("Какой тип товаров будем продавать?" + (i + 1));
 	if ((typeof(a)) === 'string' && (typeof(a)) != null && a != '' && a.length < 50 ) {
 		console.log('Все верно');
 		mainList.shopGoods[i] = a;
 	} else {
-		alert("Вы ввели неправильное значения, попробуйте еще раз");
-		let a = prompt("Какой тип товаров будем продавать?");
-		mainList.shopGoods[i] = a;
+		alert("Вы ввели неправильное значение или вообще ничего не ввели, попробуйте еще раз");
+		i = i - 1;
 	}
 }
 
