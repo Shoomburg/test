@@ -70,8 +70,11 @@ let mainList = {
 	},
 	chooseShopItems: function chooseShopItems() {
 		for (let i = 0; i < 1; i++) {
+			let a = " ";
+			let n = 1;
+			n++;
 			let items = prompt("Перечислите через запятую товары", '');
-		if ((typeof(items)) === 'string' && (typeof(items)) != null && items != null && items != '' && items.length < 50 ) {
+		if ((typeof(items)) === 'string' && (typeof(items)) != null && items != '' && items != a*n && items.length < 50 && isNaN(items) ) {
 			console.log('Все верно');
 			mainList.shopItems = items.split(',');
 			mainList.shopItems.push(prompt("Подождите, еще ", ''));
@@ -82,8 +85,8 @@ let mainList = {
 		}
 	}
 		document.write('У нас вы можете купить:<br>');
-		mainList.shopItems.forEach(function (item,i,arr) {
-		document.write((i+1) + ". " + item + '<br>');
+		mainList.shopItems.forEach(function (key,i,arr) {
+		document.write((i+1) + ". " + key + '<br>');
 		});
 	},
 }
