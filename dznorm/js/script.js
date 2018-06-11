@@ -32,6 +32,7 @@ open.addEventListener('click', () => {
 	budget_btn.disabled = false;
 });
 
+
 function checkGoods() {
 		let a = goods_item[0].value;
 		let b = goods_item[1].value;
@@ -56,16 +57,6 @@ if ((a != '' || b != '' || c != '') && mainList.open == true) {
 	employers_btn.disabled = true;
 }
 };
-
-// function checkBudget() {
-// 	let a = money;
-// if ((isNaN(money) || money == "" || money == null) && mainList.open == true) {
-// 	budget_btn.disabled = false;
-	
-// } else {
-// 	budget_btn.disabled = true;
-// }
-// };
 
 goods_btn.addEventListener('click', () => {
 	for (let i = 0; i < goods_item.length; i++) {
@@ -123,6 +114,24 @@ time_value.addEventListener('change', () => {
 		isopen_value.style.backgroundColor = 'red';
 		discount_chb.setAttribute("disabled", "disabled");
 		mainList.discount = false;
+		goods_item[0].disabled = true;
+		goods_item[0].value = '';
+		goods_item[1].disabled = true;
+		goods_item[1].value = '';
+		goods_item[2].disabled = true;
+		goods_item[2].value = '';
+		goods_item[3].disabled = true;
+		goods_item[3].value = '';
+		choose_item.disabled = true;
+		choose_item.value = '';
+		hire_employers_item[0].disabled = true;
+		hire_employers_item[1].disabled = true;
+		hire_employers_item[2].disabled = true;
+		hire_employers_item[0].value = '';
+		hire_employers_item[1].value = '';
+		hire_employers_item[2].value = '';
+		open.disabled = true;
+		employers_btn.disabled = true;
 	}
 });
 
