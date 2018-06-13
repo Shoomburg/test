@@ -22,6 +22,10 @@ let money,
 		percent = price/100*20;
 
 open.addEventListener('click', () => {
+	setTimeout(start, 2000);
+});
+
+function start() {
 	money = +prompt("Ваш бюджет?", '');
 	while (isNaN(money) || money == "" || money == null) {
 		alert("Вы ввели неправильное значение или вообще ничего не ввели, попробуйте еще раз");
@@ -30,7 +34,7 @@ open.addEventListener('click', () => {
 	budget_value.textContent = money;
 	name_value.textContent = prompt("Название Вашего магазина?", '').toUpperCase();
 	budget_btn.disabled = false;
-});
+}
 
 
 function checkGoods() {
