@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	});
 
 // timer
-	let deadline = '2018-06-15';
+	let deadline = '2018-06-20';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -89,5 +89,33 @@ window.addEventListener('DOMContentLoaded', function() {
 	};
 
 	setClock('timer', deadline);
+
+	// Modal
+
+	let more = document.querySelector('.more'),
+			moreTab = document.getElementsByClassName('description-btn'),
+			overlay = document.querySelector('.overlay'),
+			close = document.querySelector('.popup-close');
+
+		for(let i=0; i<moreTab.length; i++){
+			moreTab[i].addEventListener('click', function() {
+				this.classList.add('more-splash');
+				overlay.style.display = 'block';
+				document.body.style.overflow = 'hidden';
+			});
+		}
+
+	more.addEventListener('click', function() {
+		this.classList.add('more-splash');
+		overlay.style.display = 'block';
+		document.body.style.overflow = 'hidden';
+	});
+	close.addEventListener('click', function() {
+		overlay.style.display = 'none';
+		more.classList.remove('more-splash');
+		document.body.style.overflow = '';
+	});
+
+	console.log(moreTab);
 
 });
