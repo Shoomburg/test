@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	});
 
 // timer
-	let deadline = '2018-06-20';
+	let deadline = '2018-06-18';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -43,13 +43,13 @@ window.addEventListener('DOMContentLoaded', function() {
 		hours = Math.floor((t/(1000*60*60)));
 
 		if (hours <= 9) {
-			hours = "0" + hours
+			hours = `0${hours}`
 		};
 		if (minutes <= 9) {
-			minutes = "0" + minutes
+			minutes = `0${minutes}`
 		};
 		if (seconds <= 9) {
-			seconds = "0" + seconds
+			seconds = `0${seconds}`
 		};
 		if (Date.parse(endtime) < Date.parse(new Date())) {
 			hours = "00";
@@ -119,3 +119,30 @@ window.addEventListener('DOMContentLoaded', function() {
 	console.log(moreTab);
 
 });
+
+
+class Options {
+	constructor(height, width, bg, fontSize, textAlign) {
+		this.height = height;
+		this.width = width;
+		this.bg = bg;
+		this.fontSize = fontSize;
+		this.textAlign = textAlign;
+	}
+
+	createElem(text) {
+		let div = document.createElement('div');
+		this.text = text;
+		div.textContent = this.text;
+		document.body.appendChild(div);
+		div.style.cssText = `
+			height: ${this.height}px;
+			width: ${this.width}px;
+			background: ${this.bg};
+			font-size: ${this.fontSize}px;
+			text-align: ${this.textAlign};
+		`;
+	}
+}
+let elem = new Options(200, '100%', '#0f5f56', 30, 'center');
+elem.createElem('gfhjk jhk,l;lkjh ilujyhg likjh kujyhgg kuyjhb');
