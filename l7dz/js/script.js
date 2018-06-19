@@ -128,76 +128,94 @@ message.failure = "Что-то пошло не так...";
 
 let form = document.getElementsByClassName('main-form')[0],
 		formMS = document.getElementById('form'),
-		inputMS = formMS.getElementsByTagName('input'),
-		input = form.getElementsByTagName('input'),
+		input = document.getElementsByTagName('input'),
 		statusMessage = document.createElement('div');
 		statusMessage.classList.add('status');
 
-		form.addEventListener('submit', function(event) {
+function sendForm(elem) {
+		elem.addEventListener('submit', function(event) {
 			event.preventDefault();
-			form.appendChild(statusMessage);
+			elem.appendChild(statusMessage);
+			let formData = new FormData(elem);
 
-			// AJAX
-			let request = new XMLHttpRequest();
-			request.open("POST", 'server.php')
+			function postData(data) {
 
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				return new Promise(function(resolve, reject) {
 
-			let formData = new FormData(form);
-			request.send(formData);
-			
-			request.onreadystatechange = function() {
-				if (request.readyState < 4) {
-					statusMessage.innerHTML = message.loading;
-				} else if (request.readyState === 4) {
-					if (request.status == 200 && request.status < 300) {
-						statusMessage.innerHTML = message.success;
-						console.log("ghjkgf");
-						// Добавляем контент на страницу
+					let request = new XMLHttpRequest();
+					request.open('POST', 'server.php')
+
+					request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+					
+					request.onreadystatechange = function() {
+						if (request.readyState < 4) {
+							resolve();
+							console.log("Ждите");
+						} else if (request.readyState === 4) {
+							if (request.status == 200 && request.status < 300) {
+								resolve();
+								console.log("Успех");
+								// Добавляем контент на страницу
+							}
+							else {
+								reject();
+								console.log("Ошибка");
+							}
+						}
 					}
-					else {
-						statusMessage.innerHTML = message.failure;
-					}
-				}
-			}
+					request.send(data);
+				})
+				} // End postData
+		function clearInput() {
 			for(let i = 0; i < input.length; i++){
 				input[i].value = '';
 				//очищаем поля ввода
 			}
-		});
+		}
+		postData(formData)
+			.then(()=>  statusMessage.innerHTML = message.loading)
+			.then(()=>  statusMessage.innerHTML = message.success)
+			.catch(()=> statusMessage.innerHTML = message.failure)
+			.then(clearInput)
+})};
 
-		formMS.addEventListener('submit', function(event) {
-			event.preventDefault();
-			formMS.appendChild(statusMessage);
+		sendForm(form);
+		sendForm(formMS);
+	
 
-			// AJAX
-			let request = new XMLHttpRequest();
-			request.open("POST", 'server.php')
+		// formMS.addEventListener('submit', function(event) {
+		// 	event.preventDefault();
+		// 	formMS.appendChild(statusMessage);
 
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		// 	// AJAX
+		// 	let request = new XMLHttpRequest();
+		// 	request.open("POST", 'server.php')
 
-			let formData = new FormData(formMS);
-			request.send(formData);
+		// 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		// 	let formData = new FormData(formMS);
+		// 	request.send(formData);
 			
-			request.onreadystatechange = function() {
-				if (request.readyState < 4) {
-					statusMessage.innerHTML = message.loading;
-				} else if (request.readyState === 4) {
-					if (request.status == 200 && request.status < 300) {
-						statusMessage.innerHTML = message.success;
-						console.log("ghjkgf");
-						// Добавляем контент на страницу
-					}
-					else {
-						statusMessage.innerHTML = message.failure;
-					}
-				}
-			}
-			for(let i = 0; i < input.length; i++){
-				input[i].value = '';
-				//очищаем поля ввода
-			}
-		});
+		// 	request.onreadystatechange = function() {
+		// 		if (request.readyState < 4) {
+		// 			statusMessage.innerHTML = message.loading;
+		// 		} else if (request.readyState === 4) {
+		// 			if (request.status == 200 && request.status < 300) {
+		// 				statusMessage.innerHTML = message.success;
+		// 				console.log("ghjkgf");
+		// 				// Добавляем контент на страницу
+		// 			}
+		// 			else {
+		// 				statusMessage.innerHTML = message.failure;
+		// 			}
+		// 		}
+		// 	}
+		// 	for(let i = 0; i < input.length; i++){
+		// 		input[i].value = '';
+		// 		//очищаем поля ввода
+		// 	}
+		// });
 
 
 class Options {
