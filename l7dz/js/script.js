@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	});
 
 // timer
-	let deadline = '2018-06-18';
+	let deadline = '2018-06-20';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -120,6 +120,85 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// Form
+let message = new Object();
+message.loading = "Загрузка...";
+message.success = "Спасибо! Скоро мы свяжемся с Вами!";
+message.failure = "Что-то пошло не так...";
+
+let form = document.getElementsByClassName('main-form')[0],
+		formMS = document.getElementById('form'),
+		inputMS = formMS.getElementsByTagName('input'),
+		input = form.getElementsByTagName('input'),
+		statusMessage = document.createElement('div');
+		statusMessage.classList.add('status');
+
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			form.appendChild(statusMessage);
+
+			// AJAX
+			let request = new XMLHttpRequest();
+			request.open("POST", 'server.php')
+
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			let formData = new FormData(form);
+			request.send(formData);
+			
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						statusMessage.innerHTML = message.success;
+						console.log("ghjkgf");
+						// Добавляем контент на страницу
+					}
+					else {
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+			for(let i = 0; i < input.length; i++){
+				input[i].value = '';
+				//очищаем поля ввода
+			}
+		});
+
+		formMS.addEventListener('submit', function(event) {
+			event.preventDefault();
+			formMS.appendChild(statusMessage);
+
+			// AJAX
+			let request = new XMLHttpRequest();
+			request.open("POST", 'server.php')
+
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			let formData = new FormData(formMS);
+			request.send(formData);
+			
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						statusMessage.innerHTML = message.success;
+						console.log("ghjkgf");
+						// Добавляем контент на страницу
+					}
+					else {
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+			for(let i = 0; i < input.length; i++){
+				input[i].value = '';
+				//очищаем поля ввода
+			}
+		});
+
 
 class Options {
 	constructor(height, width, bg, fontSize, textAlign) {
@@ -146,3 +225,40 @@ class Options {
 }
 let elem = new Options(200, '100%', '#0f5f56', 30, 'center');
 elem.createElem('gfhjk jhk,l;lkjh ilujyhg likjh kujyhgg kuyjhb');
+
+
+
+function  animate(draw, duration) {
+	let start = performance.now();
+
+	requestAnimationFrame(function animate(time) {
+		let timePassed = time - start;
+
+		if (timePassed > duration) {
+			timePassed = duration;
+		}
+
+		draw(timePassed);
+
+		if (timePassed < duration) {
+			requestAnimationFrame(animate);
+		}
+	})
+}
+
+let navigation = document.getElementsByTagName('nav')[0];
+
+navigation.addEventListener('click', function(event) {
+	event.preventDefault();
+
+	animate(function(timePassed) {
+		let target = event.target;
+
+		let section = document.getElementById(target.getAttribute('href').slice(1));
+
+		window.scrollBy(0, section.getBoundingClientRect().top / 20 - 3);
+	}, 1500)
+
+
+	
+});
