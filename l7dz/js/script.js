@@ -308,11 +308,9 @@ navigation.addEventListener('click', function(event) {
 					daysSum = 0,
 					total = 0;
 
-					
-
 					function errorDot(input) { 
 						input.addEventListener('keyup', function() { 
-							input.value = input.value.replace(/[^\d]/,'').substr(0,2); 
+							this.value = this.value.replace(/[^\d]/,'').substr(0,2); 
 					});
 					}						
 					errorDot(persons);
@@ -348,10 +346,16 @@ navigation.addEventListener('click', function(event) {
 							totalValue.innerHTML = 0;
 						} else {
 							let a = total;
-							let b = this.options[this.selectedIndex].value;
-							totalValue.innerHTML = a*b;
+							// let b = this.options[this.selectedIndex].value;
+							totalValue.innerHTML = a*this.options[this.selectedIndex].value;
 						}
 					}); // end place.addEventListener
+
+					setInterval(function() {
+						if(restDays.value == '' || persons.value == '') {
+							totalValue.innerHTML = 0;
+						}
+					},1);
 
 					
 
