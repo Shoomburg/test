@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	});
 
 // timer
-	let deadline = '2018-06-20';
+	let deadline = '2018-06-30';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	console.log(moreTab);
 
-});
+
 
 // Form
 let message = new Object();
@@ -183,41 +183,6 @@ function sendForm(elem) {
 		sendForm(form);
 		sendForm(formMS);
 	
-
-		// formMS.addEventListener('submit', function(event) {
-		// 	event.preventDefault();
-		// 	formMS.appendChild(statusMessage);
-
-		// 	// AJAX
-		// 	let request = new XMLHttpRequest();
-		// 	request.open("POST", 'server.php')
-
-		// 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-		// 	let formData = new FormData(formMS);
-		// 	request.send(formData);
-			
-		// 	request.onreadystatechange = function() {
-		// 		if (request.readyState < 4) {
-		// 			statusMessage.innerHTML = message.loading;
-		// 		} else if (request.readyState === 4) {
-		// 			if (request.status == 200 && request.status < 300) {
-		// 				statusMessage.innerHTML = message.success;
-		// 				console.log("ghjkgf");
-		// 				// Добавляем контент на страницу
-		// 			}
-		// 			else {
-		// 				statusMessage.innerHTML = message.failure;
-		// 			}
-		// 		}
-		// 	}
-		// 	for(let i = 0; i < input.length; i++){
-		// 		input[i].value = '';
-		// 		//очищаем поля ввода
-		// 	}
-		// });
-
-
 class Options {
 	constructor(height, width, bg, fontSize, textAlign) {
 		this.height = height;
@@ -244,8 +209,6 @@ class Options {
 let elem = new Options(200, '100%', '#0f5f56', 30, 'center');
 elem.createElem('gfhjk jhk,l;lkjh ilujyhg likjh kujyhgg kuyjhb');
 
-
-
 function  animate(draw, duration) {
 	let start = performance.now();
 
@@ -261,7 +224,7 @@ function  animate(draw, duration) {
 		if (timePassed < duration) {
 			requestAnimationFrame(animate);
 		}
-	})
+	});
 }
 
 let navigation = document.getElementsByTagName('nav')[0];
@@ -275,8 +238,124 @@ navigation.addEventListener('click', function(event) {
 		let section = document.getElementById(target.getAttribute('href').slice(1));
 
 		window.scrollBy(0, section.getBoundingClientRect().top / 20 - 3);
-	}, 1500)
-
-
-	
+	}, 1500);
 });
+
+
+	// Slider
+	let slideIndex = 1,
+			slides = document.getElementsByClassName('slider-item'),
+			prev = document.querySelector('.prev'),
+			next = document.querySelector('.next'),
+			dotsWrap = document.querySelector('.slider-dots'),
+			dots = document.getElementsByClassName('dot');
+
+			showSlides(slideIndex);
+
+			function  showSlides(n) {
+				if (n > slides.length) {
+					slideIndex = 1; // возвращаемся к первому слайду, когда кликаем вперед с последнего
+				};
+
+				if (n < 1) {
+					slideIndex = slides.length; // с первого попадем на последний при клике на назад
+				};
+
+				for (let i = 0; i < slides.length; i++) {
+					slides[i].style.display = 'none'; // прячем слайды
+				};
+
+				for (let i = 0; i < dots.length; i++) {
+					dots[i].classList.remove('dot-active'); // убираем активный класс с точек
+				};
+
+				slides[slideIndex - 1].style.display = 'block'; // делаем видимым 1 слайд
+				dots[slideIndex - 1].classList.add('dot-active'); // делаем видимой 1 точку
+			}
+
+			function plusSlides(n) {
+				showSlides(slideIndex += n); // если +1, то вперед, если -1, то назад
+			}
+
+			function currentSlide(n) {
+				showSlides(slideIndex = n);
+			}
+
+			prev.addEventListener('click', function() {
+				plusSlides(-1);
+			});
+
+			next.addEventListener('click', function() {
+				plusSlides(1);
+			});
+			
+			dotsWrap.addEventListener('click', function(event) {
+				for(let i = 0; i<dots.length + 1; i++){
+					if(event.target.classList.contains('dot') && event.target == dots[i-1]) {
+						currentSlide(i);
+					}
+				}
+			}); // end dotsWrap.addEventListener
+
+
+			// Calculator
+
+			let persons = document.getElementsByClassName('counter-block-input')[0],
+					restDays = document.getElementsByClassName('counter-block-input')[1],
+					place = document.getElementById('select'),
+					totalValue = document.getElementById('total'),
+					personsSum = 0,
+					daysSum = 0,
+					total = 0;
+
+					
+
+					function errorDot(input) { 
+						input.addEventListener('keyup', function() { 
+							input.value = input.value.replace(/[^\d]/,'').substr(0,2); 
+					});
+					}						
+					errorDot(persons);
+					errorDot(restDays);
+					
+					// persons.value.replace(/\d/g,'').substr(0,2);
+					// restDays.value.replace(/\d/g,'').substr(0,2);
+
+					totalValue.innerHTML = 0;
+
+					persons.addEventListener('change', function() {
+						personsSum = +this.value;
+						total = (daysSum + personsSum)*4000;
+						if (restDays.value == ''){
+							totalValue.innerHTML = 0;
+						} else {
+							totalValue.innerHTML = total;
+						}
+					}); // end persons.addEventListener
+
+					restDays.addEventListener('change', function() {
+						daysSum = +this.value;
+						total = (daysSum + personsSum)*4000;
+						if (persons.value == ''){
+							totalValue.innerHTML = 0;
+						} else {
+							totalValue.innerHTML = total;
+						}
+					}); // end restDays.addEventListener
+
+					place.addEventListener('change', function(){
+						if(restDays.value == '' || persons.value == '') {
+							totalValue.innerHTML = 0;
+						} else {
+							let a = total;
+							let b = this.options[this.selectedIndex].value;
+							totalValue.innerHTML = a*b;
+						}
+					}); // end place.addEventListener
+
+					
+
+
+
+					
+		}); // Конец DOMContentLoaded
