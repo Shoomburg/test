@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() {
+// window.addEventListener('DOMContentLoaded', function() {
 	
 	let tab = document.getElementsByClassName('info-header-tab'),
 			tabContent = document.getElementsByClassName('info-tabcontent'),
@@ -362,4 +362,4 @@ navigation.addEventListener('click', function(event) {
 
 
 					
-		}); // Конец DOMContentLoaded
+		// });  Конец DOMContentLoaded
