@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() {
+// window.addEventListener('DOMContentLoaded', function() {
 
 	let tab = require('../parts/tab.js'),
 			modal = require('../parts/modal.js'),
@@ -42,4 +42,4 @@ window.addEventListener('DOMContentLoaded', function() {
 // let elem = new Options(200, '100%', '#0f5f56', 30, 'center');
 // elem.createElem('gfhjk jhk,l;lkjh ilujyhg likjh kujyhgg kuyjhb');
 
-}); // Конец DOMContentLoaded
+// });  Конец DOMContentLoaded
