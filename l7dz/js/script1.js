@@ -1,7 +1,7 @@
 // window.addEventListener('DOMContentLoaded', function() {
 	
 	let tab = document.getElementsByClassName('info-header-tab'),
-			tabContent = document.getElementsByClassName('info-tabcontent'),
+		tabContent = document.getElementsByClassName('info-tabcontent'),
 			info = document.getElementsByClassName('info-header')[0];
 
 	function hideTabContent(a) {
