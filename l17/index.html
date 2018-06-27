@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+			<link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+				<div class="progress-top"></div>
+				<div class="progress-right"></div>
+				<div class="progress-bottom"></div>
+				<div class="progress-left"></div>
+
+
+				<div class="tabs">
+
+						<ul class="tabs__caption">
+							<li class="active">1-я вкладка</li>
+							<li>2-я вкладка</li>
+						</ul>
+					
+						<div class="tabs__content active">
+							Содержимое первого блока
+						</div>
+					
+						<div class="tabs__content">
+							Содержимое второго блока
+						</div>
+					
+					</div><!-- .tabs-->
+					
+        <div class="galleria">
+            <img src="photo1.jpg">
+            <img src="photo2.jpg">
+            <img src="photo3.jpg">
+				</div>
+				
+				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="galleria/galleria-1.5.7.min.js"></script>
+        <script>
+	(function() { 
+						Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+						Galleria.configure({
+							transition: 'fadeslide',
+							imageCrop: true,
+							height: 700,
+							width: 1100,
+							autoplay: 2000,
+							lightbox: true
+					});
+            Galleria.run('.galleria');
+        }());
+				</script>
+				<script>
+					(function($) {
+						$(function() {
+
+							$('ul.tabs__caption').on('click', 'li:not(.active)', function() {
+								$(this)
+									.addClass('active').siblings().removeClass('active')
+									.closest('div.tabs').find('div.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+							});
+
+						});
+						})(jQuery);
+				</script>
+    </body>
+</html>
