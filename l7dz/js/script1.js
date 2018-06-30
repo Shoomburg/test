@@ -34,7 +34,7 @@
 	});
 
 // timer
-	let deadline = '2018-06-30';
+	let deadline = '2018-10-30';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
